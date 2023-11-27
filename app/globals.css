@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Delugar";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/Degular/Degular-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Delugar";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/Degular/Degular-Semibold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Delugar";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/Degular/Degular-Bold.woff2") format("woff2");
+}
