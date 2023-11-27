@@ -8,7 +8,7 @@ import TransactionsChart from "./transactions/chart";
 
 export default function Home() {
   return (
-    <Box as="main" bgColor={"white"}>
+    <Box as="main" bgColor={"white"} w={"full"}>
       <Flex columnGap={124} justifyContent={"space-between"} my={16}>
         <Box w={765}>
           <AvailableBalance balance={120_500} />
