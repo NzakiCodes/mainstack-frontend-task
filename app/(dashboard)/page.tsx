@@ -51,7 +51,7 @@ export default function Home() {
           <AvailableBalance
             balance={!loading && walletData ? walletData?.balance : 0}
           />
-          <TransactionsChart />
+          <TransactionsChart transactions={!loading && transactionData !== undefined ? transactionData : []} />
         </Box>
         <Balances
           ledger_balance={
