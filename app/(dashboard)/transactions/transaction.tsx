@@ -1,4 +1,4 @@
-import { ArrowBottomLeft, ArrowTopRight } from "@/components/ui/icons";
+import { ArrowBottomLeftIcon, ArrowTopRightIcon } from "@/components/ui/icons";
 import type {
   TransactionStatus,
   TransactionsType,
@@ -90,9 +90,9 @@ function Transaction({
         >
           <Box p={"4.75px"}>
             {type == "deposit" ? (
-              <ArrowBottomLeft fill={fill} h={3} w={3} />
+              <ArrowBottomLeftIcon fill={fill} h={3} w={3} />
             ) : (
-              <ArrowTopRight fill={fill} h={3} w={3} />
+              <ArrowTopRightIcon fill={fill} h={3} w={3} />
             )}
           </Box>
         </Box>

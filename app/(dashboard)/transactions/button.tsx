@@ -8,7 +8,7 @@ interface TransactionButtonProps extends ComponentProps<"button"> {
 }
 
 const TransactionButton = (props: TransactionButtonProps) => {
-  const { text, Icon, iconProps } = props;
+  const { text, Icon } = props;
   return (
     <Button
       borderRadius={"100px"}
@@ -33,7 +33,7 @@ const TransactionButton = (props: TransactionButtonProps) => {
       >
         {text}
       </Text>
-      {Icon && <Icon py={"6px"} h={5} w={5} fill={"brand"} {...iconProps} />}
+      {Icon && <Icon py={"6px"} h={5} w={5} fill={"brand"} {...props.iconProps} />}
     </Button>
   );
 };

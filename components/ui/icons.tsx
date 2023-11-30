@@ -92,15 +92,25 @@ export const DownloadIcon = (props: IconProps) => (
   </Icon>
 );
 
-export const ArrowBottomLeft = (props: IconProps) => (
+export const ArrowBottomLeftIcon = (props: IconProps) => (
   <Icon viewBox="0 0 12 12" {...props}>
     <path d="M0.25 11.75V4.25H1.08333V10.3333L11.1667 0.25L11.75 0.833333L1.66667 10.9167H7.75V11.75H0.25Z" />
   </Icon>
 );
 
-export const ArrowTopRight = (props: IconProps) => (
+export const ArrowTopRightIcon = (props: IconProps) => (
   <Icon viewBox="0 0 12 12" {...props}>
     <path d="M0.999837 11.5833L0.416504 11L10.4998 0.916677H4.4165V0.0833435H11.9165V7.58334H11.0832V1.50001L0.999837 11.5833Z" />
+  </Icon>
+);
+export const ExpandMoreIcon = (props: IconProps) => (
+  <Icon viewBox="0 0 10 6"{...props}>
+    <path d="M4.99992 5.24999L0.583252 0.833323L1.16659 0.229156L4.99992 4.06249L8.83325 0.229156L9.41658 0.833323L4.99992 5.24999Z" />
+  </Icon>
+);
+export const ExpandLessIcon = (props: IconProps) => (
+  <Icon viewBox="0 0 10 6"{...props}>
+    <path d="M1.16671 5.24999L0.583374 4.66666L5.00004 0.229156L9.41671 4.66666L8.83337 5.24999L5.00004 1.41666L1.16671 5.24999Z" />
   </Icon>
 );
 
