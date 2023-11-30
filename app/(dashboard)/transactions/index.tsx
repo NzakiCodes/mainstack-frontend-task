@@ -3,15 +3,48 @@ import { Box, Flex, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import TransactionButton from "./button";
 import { ChevronDownIcon, DownloadIcon } from "@/components/ui/icons";
 import Transaction from "./transaction";
-import type { TransactionsType } from "@/interfaces";
+import type { TransactionType, TransactionsType } from "@/interfaces";
 import { FilterModal } from "./filter-modal";
+import { useState } from "react";
 
 const Transactions = ({ data }: { data: TransactionsType[] }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [startDate, setStartDate] = useState<Date | undefined>();
+  const [endDate, setEndDate] = useState<Date | undefined>();
+  const [transactionType, setTransactionType] = useState("");
+
+  function filterData(
+    data: TransactionsType[],
+    startDate?: Date | string,
+    endDate?: Date | string,
+    transactionType?: TransactionType | "all" | TransactionType[]
+  ) {
+    return data.filter((entry) => {
+      const entryDate = new Date(entry.date);
+      const isDateInRange =
+        (!startDate || entryDate >= new Date(startDate)) &&
+        (!endDate || entryDate <= new Date(endDate));
+      const isTransactionTypeMatch =
+        !transactionType || entry.type === transactionType;
+
+      return isDateInRange && isTransactionTypeMatch;
+    });
+  }
+
+  const filteredResult = filterData(data, startDate, endDate);
 
   return (
     <>
-      <FilterModal isOpen={isOpen} onClose={onClose} />
+      <FilterModal
+        isOpen={isOpen}
+        onClose={onClose}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+        transactionType={transactionType}
+        setTransactionType={setTransactionType}
+      />
       <Box w="full">
         <Flex
           justifyContent={"space-between"}
@@ -29,7 +62,7 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
               lineHeight={"32px"}
               as="h3"
             >
-              {data.length} Transactions
+              {filteredResult.length} Transactions
             </Text>
             <Text
               fontWeight={"medium"}
@@ -56,7 +89,7 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
           </Flex>
         </Flex>
         <Stack my={"21.5px"}>
-          {data.map((transaction, idx) => {
+          {filteredResult.map((transaction, idx) => {
             switch (transaction.type) {
               case "deposit":
                 return (

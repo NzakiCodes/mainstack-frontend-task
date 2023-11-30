@@ -57,12 +57,26 @@ const transactionstypings: { name: string; value: string }[] = [
   },
 ];
 
-export const FilterModal = ({
+
+interface FilterModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    startDate: Date | undefined;
+    setStartDate: (date: Date | undefined) => void;
+    endDate: Date | undefined;
+    setEndDate: (date: Date | undefined) => void;
+    transactionType: string;
+    setTransactionType: (type: string) => void;
+  }
+export const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
   onClose,
-}: {
-  isOpen: UseDisclosureProps["isOpen"];
-  onClose: UseDisclosureProps["onClose"];
+  endDate,
+  setEndDate,
+  setStartDate,
+  setTransactionType,
+  startDate,
+  transactionType
 }) => {
   const [isStartDatePopoverOpen, setIsStartDatePopoverOpen] = useBoolean();
   const [isEndDatePopoverOpen, setIsEndDatePopoverOpen] = useBoolean();
@@ -71,8 +85,8 @@ export const FilterModal = ({
 
   const today = new Date();
 
-  const [startDate, setStartDate] = useState<Date | undefined>();
-  const [endDate, setEndDate] = useState<Date | undefined>();
+//   const [startDate, setStartDate] = useState<Date | undefined>();
+//   const [endDate, setEndDate] = useState<Date | undefined>();
 
   const popover_shadow =
     "0px 6px 12px 0px rgba(92, 115, 131, 0.08), 0px 4px 8px 0px rgba(92, 115, 131, 0.08)";
