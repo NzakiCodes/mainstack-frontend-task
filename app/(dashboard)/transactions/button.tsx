@@ -7,11 +7,8 @@ interface TransactionButtonProps extends ComponentProps<"button"> {
   iconProps?: IconProps;
 }
 
-const TransactionButton = ({
-  text,
-  Icon,
-  iconProps,
-}: TransactionButtonProps) => {
+const TransactionButton = (props: TransactionButtonProps) => {
+  const { text, Icon, iconProps } = props;
   return (
     <Button
       borderRadius={"100px"}
@@ -23,6 +20,7 @@ const TransactionButton = ({
       alignItems={"center"}
       bg={"gray.50"}
       justifyContent={"center"}
+      {...props}
     >
       <Text
         color={"brand"}

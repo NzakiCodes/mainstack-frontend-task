@@ -19,3 +19,285 @@
   font-display: swap;
   src: url("/fonts/Degular/Degular-Bold.woff2") format("woff2");
 }
+
+@media (min-width: 640px) {
+  .day-picker-months > :not([hidden]) ~ :not([hidden]) {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  .day-picker-months {
+    flex-direction: row;
+  }
+  .day-picker-months > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.day-picker-months > :not([hidden]) ~ :not([hidden]),
+.day-picker-month > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.day-picker-months {
+  flex-direction: column;
+}
+
+.day-picker-months,
+.day-picker-caption,
+.day-picker-nav,
+.day-picker-head_row,
+.day-picker-row {
+  display: flex;
+}
+
+.day-picker-caption {
+  justify-content: center;
+}
+
+.day-picker-caption {
+  padding-top: 0.25rem;
+}
+
+.day-picker-caption,
+.day-picker-cell,
+.day-picker-cell:focus-within {
+  position: relative;
+}
+
+.day-picker-caption,
+.day-picker-nav {
+  align-items: center;
+}
+
+.day-picker-caption_label,
+.day-picker-cell {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.day-picker-caption_label {
+  color: #131316;
+  text-align: center;
+  font-size: 13.481px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: -0.337px;
+}
+
+.day-picker-nav > :not([hidden]) ~ :not([hidden]) {
+  margin-right: 0;
+  margin-left: 0.25rem;
+}
+
+.day-picker-nav_button {
+  height: 1.75rem;
+}
+
+.day-picker-nav_button {
+  width: 1.75rem;
+}
+
+.day-picker-nav_button {
+  background-color: transparent;
+}
+
+.day-picker-nav_button,
+.day-picker-cell {
+  padding: 0px;
+}
+
+.day-picker-nav_button {
+  border-color: rgb(228, 228, 231);
+}
+
+.day-picker-nav_button {
+  background-color: rgb(255, 255, 255);
+}
+
+.day-picker-nav_button_previous,
+.day-picker-nav_button_next {
+  position: absolute;
+}
+
+.day-picker-nav_button_previous {
+  left: 0.25rem;
+}
+
+.day-picker-nav_button_next {
+  right: 0.25rem;
+}
+
+.day-picker-months,
+.day-picker-month,
+.day-picker-table,
+.day-picker-row {
+  width: 100%;
+}
+.day-picker-month {
+  padding-bottom: 14px;
+}
+.day-picker-table {
+  margin-top: 24px !important;
+}
+
+.day-picker-table {
+  border-collapse: collapse;
+}
+
+.day-picker-table > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.day-picker-head_cell {
+  border-radius: calc(0.75rem - 2px);
+}
+.day-picker-day {
+  width: 2.25rem;
+}
+
+.day-picker-cell {
+  height: 2.25rem;
+}
+
+.day-picker-head_cell,
+.day-picker-day {
+  font-weight: 400;
+}
+
+.day-picker-head_cell {
+  font-size: 0.8rem;
+}
+
+.day-picker-row {
+  margin-top: 0.5rem;
+}
+
+.day-picker-cell {
+  text-align: center;
+}
+.nav_button {
+  padding: 0px;
+}
+.\[\&\:has\(\[aria-selected\]\.day-range-end\)\]\:rounded-r-md:has(
+    [aria-selected].day-range-end
+  ),
+.last\:\[\&\:has\(\[aria-selected\]\)\]\:rounded-r-md:has(
+    [aria-selected]
+  ):last-child {
+  border-top-right-radius: calc(0.75rem - 2px);
+  border-bottom-right-radius: calc(0.75rem - 2px);
+}
+.\[\&\:has\(\[aria-selected\]\.day-outside\)\]\:bg-accent\/50:has(
+    [aria-selected].day-outside
+  ),
+.aria-selected\:bg-accent\/50[aria-selected="true"] {
+  background-color: rgba(244, 244, 245, 0.5);
+}
+.\[\&\:has\(\[aria-selected\]\)\]\:bg-accent:has([aria-selected]),
+.day-picker-nav_button:hover,
+.day-picker-day:hover,
+.aria-selected\:bg-accent[aria-selected="true"],
+.day-picker-day_today {
+  background-color: rgb(244, 244, 245);
+}
+.first\:\[\&\:has\(\[aria-selected\]\)\]\:rounded-l-md:has(
+    [aria-selected]
+  ):first-child {
+  border-top-left-radius: calc(0.75rem - 2px);
+  border-bottom-left-radius: calc(0.75rem - 2px);
+}
+
+.day-picker-cell:focus-within {
+  z-index: 20;
+}
+
+.day-picker-day_selected {
+  background-color: #131316;
+  color: rgb(255, 241, 242) !important;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.day-picker-head_cell,
+.day-picker-cell {
+  width: 14%;
+}
+
+.day-picker-day {
+  width: 2.75rem;
+}
+
+.day-picker-day {
+  padding: 4px;
+}
+
+.day-picker-day {
+  height: 2.75rem;
+}
+
+.day-picker-nav_button,
+.day-picker-day {
+  border-radius: 9999px;
+}
+
+.aria-selected\:opacity-100[aria-selected="true"],
+.day-picker-nav_button:hover,
+.day-picker-day[aria-selected="true"] {
+  opacity: 1;
+}
+
+.hover\:text-white:hover,
+.focus\:text-white:focus,
+.day-picker-day_selected:focus {
+  color: rgb(255, 255, 255);
+}
+.day-picker-day_selected:hover {
+  color: #131316 !important;
+}
+.focus\:bg-primary:focus,
+.day-picker-day_selected:focus {
+  background-color: #131316;
+}
+.text-muted-foreground,
+.aria-selected\:text-muted-foreground[aria-selected="true"],
+.day-picker-day_disabled,
+.day-picker-day_outside {
+  color: rgb(244, 244, 245);
+}
+.day-picker-head_cell {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -0.4px;
+  color: #56616b;
+}
+.day-picker-day_disabled,
+.day-picker-nav_button,
+.day-picker-day_outside {
+  opacity: 0.5;
+}
+
+.aria-selected\:opacity-30[aria-selected="true"] {
+  opacity: 0.3;
+}
+
+.aria-selected\:text-accent-foreground[aria-selected="true"],
+.day-picker-day_today,
+.hover\:text-accent-foreground:hover,
+.day-picker-nav_button:hover,
+.day-picker-day:hover {
+  color: rgb(24, 24, 27);
+}
+.day-picker-day_hidden {
+  visibility: hidden;
+}
+.day-picker-day_today:focus {
+  color: white !important;
+}

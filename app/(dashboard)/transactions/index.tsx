@@ -1,11 +1,20 @@
-import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Stack,
+  Text,
+  useDisclosure,
+  UseDisclosureProps,
+} from "@chakra-ui/react";
+import { useRef } from "react";
 
 import TransactionButton from "./button";
 import { ChevronDownIcon, DownloadIcon } from "@/components/ui/icons";
 import Transaction from "./transaction";
 import type { TransactionsType } from "@/interfaces";
+import { FilterModal } from "./filter-modal";
 
-const transactions_data: TransactionsType[] = [
+const transactions: TransactionsType[] = [
   {
     amount: 500,
     metadata: {
@@ -108,79 +117,91 @@ const transactions_data: TransactionsType[] = [
 ];
 
 const Transactions = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
+
   return (
-    <Box w="full">
-      <Flex
-        justifyContent={"space-between"}
-        borderBottom={"1px"}
-        borderColor={"gray.50"}
-        py={6}
-        w={"full"}
-      >
-        <Box>
-          <Text
-            fontWeight={"bold"}
-            fontSize={"24"}
-            letterSpacing={"-0.6px"}
-            color={"brand"}
-            lineHeight={"32px"}
-            as="h3"
-          >
-            {transactions_data.length} Transactions
-          </Text>
-          <Text
-            fontWeight={"medium"}
-            fontSize={"14"}
-            letterSpacing={"-0.2px"}
-            color={"gray.400"}
-            lineHeight={"16px"}
-            as={"span"}
-          >
-            Your transactions for the last 7 days
-          </Text>
-        </Box>
-        <Flex gap={3}>
-          <TransactionButton text="Filter" Icon={ChevronDownIcon} />
-          <TransactionButton
-            text="Export list"
-            iconProps={{ h: 6, w: 6, fill: "brand", py: "5.7px", mb: "4px" }}
-            Icon={DownloadIcon}
-          />
+    <>
+      <FilterModal isOpen={isOpen} onClose={onClose} />
+      <Box w="full">
+        <Flex
+          justifyContent={"space-between"}
+          borderBottom={"1px"}
+          borderColor={"gray.50"}
+          py={6}
+          w={"full"}
+        >
+          <Box>
+            <Text
+              fontWeight={"bold"}
+              fontSize={"24"}
+              letterSpacing={"-0.6px"}
+              color={"brand"}
+              lineHeight={"32px"}
+              as="h3"
+            >
+              {transactions.length} Transactions
+            </Text>
+            <Text
+              fontWeight={"medium"}
+              fontSize={"14"}
+              letterSpacing={"-0.2px"}
+              color={"gray.400"}
+              lineHeight={"16px"}
+              as={"span"}
+            >
+              Your transactions for the last 7 days
+            </Text>
+          </Box>
+          <Flex gap={3}>
+            <TransactionButton
+              onClick={onOpen}
+              text="Filter"
+              Icon={ChevronDownIcon}
+            />
+            <TransactionButton
+              text="Export list"
+              iconProps={{ h: 6, w: 6, fill: "brand", py: "5.7px", mb: "4px" }}
+              Icon={DownloadIcon}
+            />
+          </Flex>
         </Flex>
-      </Flex>
-      <Stack my={"21.5px"}>
-        {transactions_data.map((transaction) => {
-          switch (transaction.type) {
-            case "deposit":
-              return (
-                <Transaction
-                  title={
-                    transaction.metadata.product_name
-                      ? transaction.metadata.product_name
-                      : transaction.metadata.type
-                  }
-                  subtitle={transaction.metadata.name}
-                  amount={transaction.amount}
-                  date={transaction.date}
-                  status={transaction.status}
-                  type={transaction.type}
-                />
-              );
-            case "withdrawal":
-              return (
-                <Transaction
-                  title={"Cash withdrawal "}
-                  subtitle={transaction.status}
-                  amount={transaction.amount}
-                  date={transaction.date}
-                  status={transaction.status}
-                  type={transaction.type}
-                />
-              );
-          }
-        })}
-      </Stack>
-    </Box>
+        <Stack my={"21.5px"}>
+          {transactions.map((transaction, idx) => {
+            switch (transaction.type) {
+              case "deposit":
+                return (
+                  <Transaction
+                    key={idx}
+                    title={
+                      transaction.metadata.product_name
+                        ? transaction.metadata.product_name
+                        : transaction.metadata.type
+                    }
+                    subtitle={transaction.metadata.name}
+                    amount={transaction.amount}
+                    date={transaction.date}
+                    status={transaction.status}
+                    type={transaction.type}
+                  />
+                );
+              case "withdrawal":
+                return (
+                  <Transaction
+                    key={idx}
+                    title={"Cash withdrawal "}
+                    subtitle={transaction.status}
+                    amount={transaction.amount}
+                    date={transaction.date}
+                    status={transaction.status}
+                    type={transaction.type}
+                  />
+                );
+            }
+          })}
+        </Stack>
+      </Box>
+    </>
   );
 };
 

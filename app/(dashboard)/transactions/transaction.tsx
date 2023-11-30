@@ -33,7 +33,12 @@ function Transaction({
       ? "#A77A07"
       : "#961100";
 
-  const bg = status == "successful" ? "#E3FCF2" : "#F9E3E0";
+  const bg =
+    status == "successful"
+      ? "#E3FCF2"
+      : status == "pending"
+      ? "#ede4cd"
+      : "#F9E3E0";
 
   const subtitleTextColor =
     type == "deposit"
@@ -43,6 +48,32 @@ function Transaction({
       : status == "pending"
       ? "#A77A07"
       : "#961100";
+
+  const colors: {
+    status: TransactionStatus;
+    fill: string;
+    subtitleTextColor: string;
+    bg: string;
+  }[] = [
+    {
+      status: "successful",
+      fill: "#075132",
+      bg: "#E3FCF2",
+      subtitleTextColor: "gray.400",
+    },
+    {
+        status: "pending",
+        fill: "#A77A07",
+        bg: "#ede4cd",
+        subtitleTextColor: "#A77A07",
+      },
+      {
+        status: "failed",
+        fill: "#961100",
+        bg: "#F9E3E0",
+        subtitleTextColor: "#961100",
+      },
+  ];
 
   return (
     <Flex as={"div"} my={3} justifyContent={"space-between"}>
