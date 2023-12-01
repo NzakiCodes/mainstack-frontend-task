@@ -5,19 +5,22 @@ import { ChevronDownIcon, DownloadIcon } from "@/components/ui/icons";
 import Transaction from "./transaction";
 import type { TransactionType, TransactionsType } from "@/interfaces";
 import { FilterModal } from "./filter-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Transactions = ({ data }: { data: TransactionsType[] }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState<Date | undefined>();
   const [endDate, setEndDate] = useState<Date | undefined>();
-  const [transactionType, setTransactionType] = useState("");
+  const [transactionType, setTransactionType] = useState<string | undefined|TransactionType[] | string[]>();
+  const [filteredData, setFilteredData] = useState<TransactionsType[]>([
+    ...data,
+  ]);
 
   function filterData(
     data: TransactionsType[],
     startDate?: Date | string,
     endDate?: Date | string,
-    transactionType?: TransactionType | "all" | TransactionType[]
+    transactionType?: TransactionType | string | TransactionType[] | undefined | string[]
   ) {
     return data.filter((entry) => {
       const entryDate = new Date(entry.date);
@@ -31,7 +34,32 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
     });
   }
 
-  const filteredResult = filterData(data, startDate, endDate);
+  const handleFilter = () => {
+    // const filteredResult = filterData(
+    //   data,
+    //   startDate,
+    //   endDate,
+    //   transactionType
+    // );
+    // const startDate = "2022-02-01";
+    // const endDate = "2022-03-01";
+    // const transactionType = "deposit";
+
+    const filteredResult = filterData(
+      data,
+      startDate,
+      endDate,
+      transactionType
+    );
+
+    setFilteredData(filteredResult);
+    onClose();
+  };
+
+  const handleClear = () => {
+    setFilteredData(data);
+    onClose();
+  };
 
   return (
     <>
@@ -42,8 +70,10 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
         setStartDate={setStartDate}
         endDate={endDate}
         setEndDate={setEndDate}
-        transactionType={transactionType}
+        transactionType={transactionType ? transactionType : ""}
         setTransactionType={setTransactionType}
+        onFilter={handleFilter}
+        onClear={handleClear}
       />
       <Box w="full">
         <Flex
@@ -62,7 +92,7 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
               lineHeight={"32px"}
               as="h3"
             >
-              {filteredResult.length} Transactions
+              {filteredData.length} Transactions
             </Text>
             <Text
               fontWeight={"medium"}
@@ -89,7 +119,7 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
           </Flex>
         </Flex>
         <Stack my={"21.5px"}>
-          {filteredResult.map((transaction, idx) => {
+          {filteredData.map((transaction, idx) => {
             switch (transaction.type) {
               case "deposit":
                 return (

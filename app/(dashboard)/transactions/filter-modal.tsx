@@ -19,6 +19,7 @@ import {
   FormControl,
   Stack,
   Checkbox,
+  CheckboxGroup,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -29,10 +30,11 @@ import {
   ExpandLessIcon,
   ExpandMoreIcon,
 } from "@/components/ui/icons";
+import { TransactionType } from "@/interfaces";
 
 const transactionstypings: { name: string; value: string }[] = [
   {
-    value: "store",
+    value: "deposit",
     name: " Store Transactions",
   },
   {
@@ -57,17 +59,18 @@ const transactionstypings: { name: string; value: string }[] = [
   },
 ];
 
-
 interface FilterModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    startDate: Date | undefined;
-    setStartDate: (date: Date | undefined) => void;
-    endDate: Date | undefined;
-    setEndDate: (date: Date | undefined) => void;
-    transactionType: string;
-    setTransactionType: (type: string) => void;
-  }
+  isOpen: boolean;
+  onClose: () => void;
+  startDate: Date | undefined;
+  setStartDate: (date: Date | undefined) => void;
+  endDate: Date | undefined;
+  setEndDate: (date: Date | undefined) => void;
+  transactionType: string | TransactionType[] | string[];
+  setTransactionType: (type: string| string[]) => void;
+  onFilter: () => void;
+  onClear: () => void;
+}
 export const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
   onClose,
@@ -76,7 +79,9 @@ export const FilterModal: React.FC<FilterModalProps> = ({
   setStartDate,
   setTransactionType,
   startDate,
-  transactionType
+  transactionType,
+  onFilter,
+  onClear,
 }) => {
   const [isStartDatePopoverOpen, setIsStartDatePopoverOpen] = useBoolean();
   const [isEndDatePopoverOpen, setIsEndDatePopoverOpen] = useBoolean();
@@ -84,9 +89,6 @@ export const FilterModal: React.FC<FilterModalProps> = ({
     useBoolean();
 
   const today = new Date();
-
-//   const [startDate, setStartDate] = useState<Date | undefined>();
-//   const [endDate, setEndDate] = useState<Date | undefined>();
 
   const popover_shadow =
     "0px 6px 12px 0px rgba(92, 115, 131, 0.08), 0px 4px 8px 0px rgba(92, 115, 131, 0.08)";
@@ -291,8 +293,8 @@ export const FilterModal: React.FC<FilterModalProps> = ({
                     rounded={"xl"}
                   >
                     <Flex w={"full"} justifyContent={"space-between"}>
-                      {startDate ? (
-                        format(startDate, "dd MMM yyyy")
+                      {transactionType.length > 1 ? (
+                        transactionType
                       ) : (
                         <span>Store Transactions</span>
                       )}
@@ -319,11 +321,15 @@ export const FilterModal: React.FC<FilterModalProps> = ({
                     border={"none"}
                   >
                     <Stack>
-                      {transactionstypings.map(({ name, value }, idx) => (
-                        <Checkbox key={value + idx} p="10px" value={value}>
-                          {name}
-                        </Checkbox>
-                      ))}
+                      <CheckboxGroup
+                        onChange={(e) => setTransactionType(e as unknown as string[])}
+                      >
+                        {transactionstypings.map(({ name, value }, idx) => (
+                          <Checkbox key={value + idx} p="10px" value={value}>
+                            {name}
+                          </Checkbox>
+                        ))}
+                      </CheckboxGroup>
                     </Stack>
                   </PopoverBody>
                 </PopoverContent>
@@ -346,7 +352,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
             lineHeight={"24px"}
             variant="outline"
             mr={3}
-            onClick={onClose}
+            onClick={onClear}
           >
             Clear
           </Button>
@@ -360,6 +366,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
             variant={"solid"}
             bg={"brand"}
             color={"white"}
+            onClick={onFilter}
           >
             Apply
           </Button>
