@@ -11,7 +11,9 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState<Date | undefined>();
   const [endDate, setEndDate] = useState<Date | undefined>();
-  const [transactionType, setTransactionType] = useState<string | undefined|TransactionType[] | string[]>();
+  const [transactionType, setTransactionType] = useState<
+    string | undefined | TransactionType[] | string[]
+  >();
   const [filteredData, setFilteredData] = useState<TransactionsType[]>([
     ...data,
   ]);
@@ -20,7 +22,12 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
     data: TransactionsType[],
     startDate?: Date | string,
     endDate?: Date | string,
-    transactionType?: TransactionType | string | TransactionType[] | undefined | string[]
+    transactionType?:
+      | TransactionType
+      | string
+      | TransactionType[]
+      | undefined
+      | string[]
   ) {
     return data.filter((entry) => {
       const entryDate = new Date(entry.date);
@@ -33,6 +40,10 @@ const Transactions = ({ data }: { data: TransactionsType[] }) => {
       return isDateInRange && isTransactionTypeMatch;
     });
   }
+
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
 
   const handleFilter = () => {
     // const filteredResult = filterData(
